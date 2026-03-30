@@ -135,6 +135,12 @@ const Index = () => {
           <FunStatCard icon="🚨" value={requests.filter(r => r.status === "overdue").length} label="Overdue" gradient="gradient-cool" delay={0.45} />
         </div>
 
+        {/* Tips Banner + Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <FunTipsBanner />
+          <QuickActions onRequestClick={() => setModalOpen(true)} />
+        </div>
+
         {/* Overdue Notice */}
         {hasOverdue && (
           <motion.div
