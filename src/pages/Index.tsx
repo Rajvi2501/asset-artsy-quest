@@ -7,6 +7,10 @@ import FunStatCard from "@/components/dashboard/FunStatCard";
 import CartoonAssetIcon from "@/components/dashboard/CartoonAssetIcon";
 import RequestModal from "@/components/dashboard/RequestModal";
 import FunIllustration from "@/components/dashboard/FunIllustration";
+import FunTipsBanner from "@/components/dashboard/FunTipsBanner";
+import AchievementBadges from "@/components/dashboard/AchievementBadges";
+import QuickActions from "@/components/dashboard/QuickActions";
+import ActivityTimeline from "@/components/dashboard/ActivityTimeline";
 import type { RequestData } from "@/components/dashboard/RequestModal";
 
 interface AssetRequest {
