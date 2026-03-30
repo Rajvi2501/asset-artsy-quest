@@ -7,6 +7,10 @@ import FunStatCard from "@/components/dashboard/FunStatCard";
 import CartoonAssetIcon from "@/components/dashboard/CartoonAssetIcon";
 import RequestModal from "@/components/dashboard/RequestModal";
 import FunIllustration from "@/components/dashboard/FunIllustration";
+import FunTipsBanner from "@/components/dashboard/FunTipsBanner";
+import AchievementBadges from "@/components/dashboard/AchievementBadges";
+import QuickActions from "@/components/dashboard/QuickActions";
+import ActivityTimeline from "@/components/dashboard/ActivityTimeline";
 import type { RequestData } from "@/components/dashboard/RequestModal";
 
 interface AssetRequest {
@@ -131,6 +135,12 @@ const Index = () => {
           <FunStatCard icon="🚨" value={requests.filter(r => r.status === "overdue").length} label="Overdue" gradient="gradient-cool" delay={0.45} />
         </div>
 
+        {/* Tips Banner + Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <FunTipsBanner />
+          <QuickActions onRequestClick={() => setModalOpen(true)} />
+        </div>
+
         {/* Overdue Notice */}
         {hasOverdue && (
           <motion.div
@@ -218,6 +228,12 @@ const Index = () => {
             </table>
           </div>
         </motion.div>
+
+        {/* Achievements + Activity Timeline */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <AchievementBadges />
+          <ActivityTimeline />
+        </div>
 
         {/* Fun footer */}
         <motion.div
