@@ -229,6 +229,12 @@ const Index = () => {
           </div>
         </motion.div>
 
+        {/* Achievements + Activity Timeline */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <AchievementBadges />
+          <ActivityTimeline />
+        </div>
+
         {/* Fun footer */}
         <motion.div
           initial={{ opacity: 0 }}
