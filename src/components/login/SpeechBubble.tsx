@@ -2,11 +2,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const quotes = [
-  { text: "Track every asset from request to return 📋", emoji: "📋" },
-  { text: "Real-time visibility into your IT inventory 🖥️", emoji: "🖥️" },
-  { text: "Simplified asset management for modern teams 🚀", emoji: "🚀" },
-  { text: "Request, approve & assign — all in one place ✅", emoji: "✅" },
-  { text: "Stay organized, stay productive 💼", emoji: "💼" },
+  { text: "Laptop liya? Receipt kahan hai? 🤔", emoji: "😅" },
+  { text: "Assets track karo, headache nahi! 🧠", emoji: "💡" },
+  { text: "IT wale bole — pehle login karo! 🔐", emoji: "🫡" },
+  { text: "Charger churana band karo yaar 😤", emoji: "⚡" },
+  { text: "Ek mouse ki keemat tum kya jaano! 🖱️", emoji: "😂" },
 ];
 
 const SpeechBubble = () => {
