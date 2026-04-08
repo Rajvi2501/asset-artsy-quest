@@ -17,11 +17,11 @@ const Login = () => {
 
   const handleContinue = () => {
     if (!employeeId.trim()) {
-      toast.error("Bhai Employee ID toh daal! 😄");
+      toast.error("Please enter your Employee ID to continue.");
       return;
     }
     if (!role) {
-      toast.error("Role select karo pehle! 🎭");
+      toast.error("Please select your role to proceed.");
       return;
     }
     setIsLoading(true);
@@ -60,7 +60,7 @@ const Login = () => {
           <h1 className="text-lg font-bold text-foreground font-display">
             IT Asset Hub
           </h1>
-          <p className="text-xs text-muted-foreground">Track it. Own it. Love it. 💜</p>
+          <p className="text-xs text-muted-foreground">IT Asset Management Portal</p>
         </div>
       </motion.div>
 
@@ -85,7 +85,7 @@ const Login = () => {
               transition={{ delay: 1 }}
               className="text-xs text-muted-foreground text-center italic"
             >
-              "Har asset ka hisaab, har employee ka jawaab" ✨
+              "Streamline your IT assets, simplify your workflow" ✨
             </motion.p>
           </motion.div>
 
@@ -131,7 +131,7 @@ const Login = () => {
                 transition={{ delay: 0.45 }}
                 className="text-2xl font-bold text-center text-foreground mb-1 font-display"
               >
-                Let's Go! 🎯
+                Welcome Back 👋
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0 }}
@@ -139,7 +139,7 @@ const Login = () => {
                 transition={{ delay: 0.55 }}
                 className="text-center text-muted-foreground mb-6 text-sm"
               >
-                Apna ID daalo aur shuru karo
+                Sign in with your Employee ID to get started
               </motion.p>
 
               {/* Employee ID */}
@@ -170,7 +170,7 @@ const Login = () => {
                 className="mb-6"
               >
                 <label className="block text-sm font-semibold text-foreground mb-3 text-center font-display">
-                  Tum kaun ho? 🤷
+                  Select Your Role
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <RoleCard
@@ -218,7 +218,7 @@ const Login = () => {
                     </motion.span>
                   ) : (
                     <>
-                      Chalo Shuru Karein!
+                      Continue
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </>
                   )}
