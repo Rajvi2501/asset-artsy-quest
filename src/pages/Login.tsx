@@ -1,22 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, ShieldCheck, ArrowRight, Monitor, Fingerprint } from "lucide-react";
+import { User, ShieldCheck, ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import ComicScene from "@/components/login/ComicScene";
+import SpeechBubble from "@/components/login/SpeechBubble";
 import FloatingShapes from "@/components/dashboard/FloatingShapes";
 import { toast } from "sonner";
-
-const floatingIcons = [
-  { icon: "💻", x: "7%", y: "20%", delay: 0 },
-  { icon: "🖥️", x: "87%", y: "18%", delay: 0.8 },
-  { icon: "⌨️", x: "10%", y: "72%", delay: 1.2 },
-  { icon: "📱", x: "90%", y: "68%", delay: 0.4 },
-  { icon: "🎧", x: "82%", y: "42%", delay: 1.6 },
-  { icon: "🖱️", x: "5%", y: "48%", delay: 2 },
-  { icon: "📡", x: "18%", y: "88%", delay: 0.6 },
-  { icon: "🔐", x: "78%", y: "85%", delay: 1 },
-];
 
 const Login = () => {
   const [employeeId, setEmployeeId] = useState("");
@@ -26,11 +17,11 @@ const Login = () => {
 
   const handleContinue = () => {
     if (!employeeId.trim()) {
-      toast.error("Please enter your Employee ID");
+      toast.error("Bhai Employee ID toh daal! 😄");
       return;
     }
     if (!role) {
-      toast.error("Please select your role");
+      toast.error("Role select karo pehle! 🎭");
       return;
     }
     setIsLoading(true);
@@ -40,212 +31,263 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-accent/10">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
       <FloatingShapes />
 
-      {/* Floating tech icons */}
-      {floatingIcons.map((item, i) => (
-        <motion.div
-          key={i}
-          className="absolute text-2xl pointer-events-none select-none opacity-30"
-          style={{ left: item.x, top: item.y }}
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 5 + i * 0.4, repeat: Infinity, delay: item.delay, ease: "easeInOut" }}
-        >
-          {item.icon}
-        </motion.div>
-      ))}
+      {/* Comic-style halftone background pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: "radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      />
 
-      {/* Top nav */}
+      {/* Top bar */}
       <motion.div
-        initial={{ y: -50, opacity: 0 }}
+        initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         className="relative z-10 flex items-center gap-3 px-6 py-4"
       >
-        <div className="w-11 h-11 rounded-xl gradient-cool flex items-center justify-center shadow-playful">
-          <Monitor className="w-5 h-5 text-primary-foreground" />
-        </div>
+        <motion.div
+          className="w-11 h-11 rounded-xl flex items-center justify-center shadow-md"
+          style={{ background: "var(--gradient-cool)" }}
+          whileHover={{ rotate: 12 }}
+        >
+          <Zap className="w-5 h-5 text-primary-foreground" />
+        </motion.div>
         <div>
-          <h1 className="text-lg font-bold text-foreground" style={{ fontFamily: "var(--font-display)" }}>
-            IT Asset Management
+          <h1 className="text-lg font-bold text-foreground font-display">
+            IT Asset Hub
           </h1>
-          <p className="text-xs text-muted-foreground">Manage, allocate, and track IT assets efficiently</p>
+          <p className="text-xs text-muted-foreground">Track it. Own it. Love it. 💜</p>
         </div>
       </motion.div>
 
-      {/* Login card */}
+      {/* Main content */}
       <div className="relative z-10 flex items-center justify-center px-4" style={{ minHeight: "calc(100vh - 72px)" }}>
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0, y: 30 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 100, damping: 16, delay: 0.15 }}
-          className="w-full max-w-md"
-        >
-          <div className="bg-card/90 backdrop-blur-xl rounded-3xl shadow-playful p-8 border border-border/40 relative overflow-hidden">
-            {/* Subtle decorative blobs */}
-            <div className="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-primary/8 animate-blob" />
-            <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-accent/8 animate-blob" style={{ animationDelay: "3s" }} />
+        <div className="w-full max-w-4xl grid md:grid-cols-2 gap-6 items-center">
 
-            {/* Icon */}
-            <motion.div
-              className="flex justify-center mb-5"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", delay: 0.3 }}
-            >
-              <div className="w-16 h-16 rounded-2xl gradient-hero flex items-center justify-center shadow-hover">
-                <Fingerprint className="w-8 h-8 text-primary-foreground" />
-              </div>
-            </motion.div>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
-              className="text-2xl font-bold text-center text-foreground mb-1"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Welcome Back
-            </motion.h2>
+          {/* Left — Illustration + Speech bubble */}
+          <motion.div
+            initial={{ x: -60, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 80, damping: 14, delay: 0.1 }}
+            className="hidden md:flex flex-col items-center gap-5"
+          >
+            <SpeechBubble />
+            <div className="w-full max-w-xs">
+              <ComicScene />
+            </div>
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.45 }}
-              className="text-center text-muted-foreground mb-6 text-sm"
+              transition={{ delay: 1 }}
+              className="text-xs text-muted-foreground text-center italic"
             >
-              Sign in with your Employee ID
+              "Har asset ka hisaab, har employee ka jawaab" ✨
             </motion.p>
+          </motion.div>
 
-            {/* Employee ID */}
-            <motion.div
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mb-5"
-            >
-              <label className="block text-sm font-semibold text-foreground mb-2" style={{ fontFamily: "var(--font-display)" }}>
-                Employee ID
-              </label>
-              <Input
-                type="text"
-                placeholder="e.g. 90311504"
-                value={employeeId}
-                onChange={(e) => setEmployeeId(e.target.value)}
-                className="h-12 rounded-xl bg-muted/40 border-2 border-border/50 text-base focus-visible:ring-primary/30 focus-visible:border-primary/50 placeholder:text-muted-foreground/50"
-              />
-            </motion.div>
+          {/* Right — Login card */}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0, y: 30 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 100, damping: 16, delay: 0.2 }}
+          >
+            <div className="bg-card/90 backdrop-blur-xl rounded-3xl shadow-[var(--shadow-playful)] p-8 border-2 border-border/30 relative overflow-hidden">
+              {/* Decorative corner accent */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-primary/5" />
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 rounded-full bg-accent/5" />
 
-            {/* Role selection */}
-            <motion.div
-              initial={{ x: 20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="mb-6"
-            >
-              <label className="block text-sm font-semibold text-foreground mb-3 text-center" style={{ fontFamily: "var(--font-display)" }}>
-                Select Your Role
-              </label>
-              <div className="grid grid-cols-2 gap-3">
-                {/* Employee */}
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  onClick={() => setRole("employee")}
-                  className={`relative p-5 rounded-2xl border-2 transition-all duration-300 flex flex-col items-center gap-2.5 ${
-                    role === "employee"
-                      ? "border-primary bg-primary/8 shadow-playful"
-                      : "border-border/50 bg-muted/20 hover:border-primary/30"
-                  }`}
-                >
-                  <AnimatePresence>
-                    {role === "employee" && (
-                      <motion.div
-                        layoutId="roleIndicator"
-                        className="absolute inset-0 rounded-2xl border-2 border-primary/40"
-                        initial={false}
-                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                      />
-                    )}
-                  </AnimatePresence>
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
-                    role === "employee" ? "gradient-cool shadow-md" : "bg-muted"
-                  }`}>
-                    <User className={`w-6 h-6 ${role === "employee" ? "text-primary-foreground" : "text-muted-foreground"}`} />
-                  </div>
-                  <span className={`font-semibold text-sm ${role === "employee" ? "text-primary" : "text-foreground"}`}
-                    style={{ fontFamily: "var(--font-display)" }}>
-                    Employee
-                  </span>
-                </motion.button>
-
-                {/* Admin */}
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  onClick={() => setRole("admin")}
-                  className={`relative p-5 rounded-2xl border-2 transition-all duration-300 flex flex-col items-center gap-2.5 ${
-                    role === "admin"
-                      ? "border-secondary bg-secondary/8 shadow-playful"
-                      : "border-border/50 bg-muted/20 hover:border-secondary/30"
-                  }`}
-                >
-                  <AnimatePresence>
-                    {role === "admin" && (
-                      <motion.div
-                        layoutId="roleIndicator"
-                        className="absolute inset-0 rounded-2xl border-2 border-secondary/40"
-                        initial={false}
-                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                      />
-                    )}
-                  </AnimatePresence>
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
-                    role === "admin" ? "gradient-warm shadow-md" : "bg-muted"
-                  }`}>
-                    <ShieldCheck className={`w-6 h-6 ${role === "admin" ? "text-primary-foreground" : "text-muted-foreground"}`} />
-                  </div>
-                  <span className={`font-semibold text-sm ${role === "admin" ? "text-secondary" : "text-foreground"}`}
-                    style={{ fontFamily: "var(--font-display)" }}>
-                    Admin
-                  </span>
-                </motion.button>
-              </div>
-            </motion.div>
-
-            {/* Continue */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.7 }}
-            >
-              <Button
-                onClick={handleContinue}
-                disabled={isLoading}
-                className="w-full h-12 rounded-xl text-base font-bold gradient-hero text-primary-foreground border-0 shadow-playful hover:shadow-hover transition-all duration-300"
-                style={{ fontFamily: "var(--font-display)" }}
+              {/* Comic-style ZAP badge */}
+              <motion.div
+                className="flex justify-center mb-4"
+                initial={{ scale: 0, rotate: -20 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ type: "spring", delay: 0.4 }}
               >
-                {isLoading ? "Signing in..." : (
-                  <>
-                    Continue
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </>
-                )}
-              </Button>
-            </motion.div>
+                <div className="relative">
+                  <div
+                    className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg"
+                    style={{ background: "var(--gradient-hero)" }}
+                  >
+                    <span className="text-3xl">🚀</span>
+                  </div>
+                  {/* Sparkle */}
+                  <motion.span
+                    className="absolute -top-1 -right-1 text-sm"
+                    animate={{ scale: [1, 1.3, 1], rotate: [0, 15, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    ✨
+                  </motion.span>
+                </div>
+              </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9 }}
-              className="text-center text-xs text-muted-foreground mt-5"
-            >
-              Seamless IT Asset Management
-            </motion.p>
-          </div>
-        </motion.div>
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.45 }}
+                className="text-2xl font-bold text-center text-foreground mb-1 font-display"
+              >
+                Let's Go! 🎯
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.55 }}
+                className="text-center text-muted-foreground mb-6 text-sm"
+              >
+                Apna ID daalo aur shuru karo
+              </motion.p>
+
+              {/* Employee ID */}
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="mb-5"
+              >
+                <label className="block text-sm font-semibold text-foreground mb-2 font-display">
+                  Employee ID 🪪
+                </label>
+                <Input
+                  type="text"
+                  placeholder="e.g. 90311504"
+                  value={employeeId}
+                  onChange={(e) => setEmployeeId(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleContinue()}
+                  className="h-12 rounded-xl bg-muted/40 border-2 border-border/50 text-base focus-visible:ring-primary/30 focus-visible:border-primary/50 placeholder:text-muted-foreground/50"
+                />
+              </motion.div>
+
+              {/* Role selection */}
+              <motion.div
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="mb-6"
+              >
+                <label className="block text-sm font-semibold text-foreground mb-3 text-center font-display">
+                  Tum kaun ho? 🤷
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  <RoleCard
+                    role="employee"
+                    selected={role === "employee"}
+                    onSelect={() => setRole("employee")}
+                    icon={<User className="w-6 h-6" />}
+                    label="Employee"
+                    emoji="👨‍💻"
+                    activeGradient="var(--gradient-cool)"
+                    activeColor="text-primary"
+                  />
+                  <RoleCard
+                    role="admin"
+                    selected={role === "admin"}
+                    onSelect={() => setRole("admin")}
+                    icon={<ShieldCheck className="w-6 h-6" />}
+                    label="Admin"
+                    emoji="🛡️"
+                    activeGradient="var(--gradient-warm)"
+                    activeColor="text-secondary"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Submit */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                <Button
+                  onClick={handleContinue}
+                  disabled={isLoading}
+                  className="w-full h-12 rounded-xl text-base font-bold text-primary-foreground border-0 shadow-[var(--shadow-playful)] hover:shadow-[var(--shadow-hover)] transition-all duration-300 font-display"
+                  style={{ background: "var(--gradient-hero)" }}
+                >
+                  {isLoading ? (
+                    <motion.span
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+                      className="inline-block"
+                    >
+                      ⚡
+                    </motion.span>
+                  ) : (
+                    <>
+                      Chalo Shuru Karein!
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </>
+                  )}
+                </Button>
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="text-center text-xs text-muted-foreground mt-5"
+              >
+                Made with ❤️ for IT Teams
+              </motion.p>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
 };
+
+/* ---- Role Card Sub-Component ---- */
+interface RoleCardProps {
+  role: string;
+  selected: boolean;
+  onSelect: () => void;
+  icon: React.ReactNode;
+  label: string;
+  emoji: string;
+  activeGradient: string;
+  activeColor: string;
+}
+
+const RoleCard = ({ selected, onSelect, icon, label, emoji, activeGradient, activeColor }: RoleCardProps) => (
+  <motion.button
+    whileHover={{ scale: 1.04 }}
+    whileTap={{ scale: 0.96 }}
+    onClick={onSelect}
+    className={`relative p-5 rounded-2xl border-2 transition-all duration-300 flex flex-col items-center gap-2 ${
+      selected
+        ? `border-current ${activeColor} bg-current/5 shadow-[var(--shadow-playful)]`
+        : "border-border/50 bg-muted/20 hover:border-primary/20"
+    }`}
+  >
+    <AnimatePresence>
+      {selected && (
+        <motion.div
+          layoutId="roleGlow"
+          className="absolute inset-0 rounded-2xl opacity-10"
+          style={{ background: activeGradient }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.08 }}
+          exit={{ opacity: 0 }}
+        />
+      )}
+    </AnimatePresence>
+    <div
+      className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
+        selected ? "text-primary-foreground shadow-md" : "bg-muted text-muted-foreground"
+      }`}
+      style={selected ? { background: activeGradient } : undefined}
+    >
+      {selected ? <span className="text-xl">{emoji}</span> : icon}
+    </div>
+    <span className={`font-semibold text-sm font-display ${selected ? activeColor : "text-foreground"}`}>
+      {label}
+    </span>
+  </motion.button>
+);
 
 export default Login;
